@@ -606,6 +606,7 @@ public class MainGUI extends javax.swing.JFrame {
                 Integer.parseInt(fieldWeeks.getText())));
         }
         clearAddForm();
+        updateTable();
     }//GEN-LAST:event_btnSaveAndCreateNewActionPerformed
 
     private void comboxSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxSexActionPerformed
