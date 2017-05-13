@@ -1,5 +1,7 @@
 package MainGUI;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  * @author Bilaal
  */
@@ -7,12 +9,31 @@ public class MainGUI extends javax.swing.JFrame {
 
     HashTable mainHashTable;
     String FORM_ADD_TITLE = "Add an employee";
+    int hashTableLength = 2;
 
     public MainGUI() {
-        this.mainHashTable = new HashTable(2);
+        this.mainHashTable = new HashTable(hashTableLength);
         initComponents();
     }
-
+    public void updateTable(){
+        employeeTable.setVisible(false);
+        DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+        int numRows = 0;
+        model.setRowCount(0);
+        for (int x = 0; x < hashTableLength; x++){
+            for (EmployeeInfo element : mainHashTable.buckets[x]) {
+                numRows++;
+                model.setRowCount(numRows);
+                employeeTable.setValueAt(element.getEmployeeNumber(), numRows, 1);
+                employeeTable.setValueAt(element.getFirstName(), numRows, 2);
+                employeeTable.setValueAt(element.getLastName(), numRows, 3);
+                employeeTable.setValueAt(element.getWorkLocation(), numRows, 5);
+                employeeTable.setValueAt(element.getDeductionsRate(), numRows, 7);
+            }
+        }
+        employeeTable.repaint();
+        employeeTable.setVisible(true);
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -62,8 +83,6 @@ public class MainGUI extends javax.swing.JFrame {
         menubar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-
-        formAdd.setSize(new java.awt.Dimension(620, 280));
 
         labelFN.setText("First Name");
 
@@ -379,16 +398,9 @@ public class MainGUI extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class
             };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         employeeTable.setGridColor(new java.awt.Color(222, 222, 222));
@@ -536,17 +548,17 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
+        formAdd.setTitle(FORM_ADD_TITLE);
+        formAdd.pack();
+        fieldFN.setText("");
+        fieldLN.setText("");
 
+        formAdd.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
         // TODO add your handling code here:
         //sets the title of the panel (because the same panel is used for modifying and editing)
-        formAdd.setTitle(FORM_ADD_TITLE);
-        fieldFN.setText("");
-        fieldLN.setText("");
-
-        formAdd.setVisible(true);
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void fieldAnnualSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAnnualSalaryActionPerformed
@@ -568,6 +580,7 @@ public class MainGUI extends javax.swing.JFrame {
     private void btnSaveAndExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAndExitActionPerformed
         btnSaveAndCreateNewActionPerformed(evt);
         formAdd.setVisible(false);
+        updateTable();
     }//GEN-LAST:event_btnSaveAndExitActionPerformed
 
     private void btnSaveAndCreateNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAndCreateNewActionPerformed
@@ -641,6 +654,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MainGUI().setVisible(true);
             }
