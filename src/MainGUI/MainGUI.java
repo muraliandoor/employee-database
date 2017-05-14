@@ -933,6 +933,7 @@ public class MainGUI extends javax.swing.JFrame {
                 || ("".equals(fieldLN.getText()))
                 || (((double) spinnerDeductionsRate.getValue() < 0) || ((double) spinnerDeductionsRate.getValue() > 1))
                 || ((tabEType.getSelectedComponent() == panelFullTime) && (fieldAnnualSalary.getText() == null))) {
+            ErrorWindow.pack();
             ErrorWindow.setVisible(true);
         } else {
             if (tabEType.getSelectedComponent() == panelFullTime) {
