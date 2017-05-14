@@ -29,13 +29,13 @@ public class MainGUI extends javax.swing.JFrame {
                 rowData[2] = mainHashTable.buckets[x].get(empIndex).getLastName();
                 switch (mainHashTable.buckets[x].get(empIndex).getSex()) {
                     case 0:
-                        rowData[5] = "Male";
+                        rowData[3] = "Male";
                         break;
                     case 1:
-                        rowData[5] = "Female";
+                        rowData[3] = "Female";
                         break;
                     default:
-                        rowData[5] = "Other";
+                        rowData[3] = "Other";
                         break;
                 }
                 rowData[4] = comboxWorkLocation.getModel().getElementAt(mainHashTable.buckets[x].get(empIndex).getWorkLocation());
