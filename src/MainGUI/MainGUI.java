@@ -155,6 +155,7 @@ public class MainGUI extends javax.swing.JFrame {
         ErrorWindow = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         labelErrorMsg = new javax.swing.JLabel();
+        okButton = new javax.swing.JButton();
         panelTable = new javax.swing.JPanel();
         scrollPanel = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
@@ -564,8 +565,6 @@ public class MainGUI extends javax.swing.JFrame {
 
         ErrorWindow.setAlwaysOnTop(true);
         ErrorWindow.setMinimumSize(new java.awt.Dimension(200, 40));
-        ErrorWindow.setPreferredSize(new java.awt.Dimension(200, 40));
-        ErrorWindow.setSize(new java.awt.Dimension(200, 40));
 
         labelErrorMsg.setText("Please fix the error(s) before saving");
 
@@ -582,6 +581,13 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ErrorWindowLayout = new javax.swing.GroupLayout(ErrorWindow.getContentPane());
         ErrorWindow.getContentPane().setLayout(ErrorWindowLayout);
         ErrorWindowLayout.setHorizontalGroup(
@@ -589,14 +595,20 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(ErrorWindowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ErrorWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(okButton)
+                .addContainerGap())
         );
         ErrorWindowLayout.setVerticalGroup(
             ErrorWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ErrorWindowLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(okButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1084,6 +1096,11 @@ public class MainGUI extends javax.swing.JFrame {
         btnEditActionPerformed(evt);
     }//GEN-LAST:event_editMenuItemActionPerformed
 
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        // TODO add your handling code here:
+        ErrorWindow.setVisible(false);
+    }//GEN-LAST:event_okButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1171,6 +1188,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel labelWeeks;
     private javax.swing.JLabel labelWorkLocation;
     private javax.swing.JMenuBar menubar;
+    private javax.swing.JButton okButton;
     private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JPanel panelFullTime;
     private javax.swing.JPanel panelLeft;
