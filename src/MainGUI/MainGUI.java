@@ -712,7 +712,6 @@ public class MainGUI extends javax.swing.JFrame {
 
             while ((line = fileReader.readLine()) != null) {
                 String[] employeeAttributes = line.split(",");
-                for (int a = 0; a < employeeAttributes.length; a++) {
                     if ("FT".equals(employeeAttributes[0])) {
                         mainHashTable.addEmployee(new FullTimeEmployee(
                                 Integer.parseInt(employeeAttributes[3]),
@@ -724,17 +723,16 @@ public class MainGUI extends javax.swing.JFrame {
                                 Double.parseDouble(employeeAttributes[1])));
                     } else if ("PT".equals(employeeAttributes[0])) {
                         mainHashTable.addEmployee(new PartTimeEmployee(
-                                Integer.parseInt(employeeAttributes[6]),
+                                Integer.parseInt(employeeAttributes[5]),
+                                employeeAttributes[6],
                                 employeeAttributes[7],
-                                employeeAttributes[8],
+                                Integer.parseInt(employeeAttributes[8]),
                                 Integer.parseInt(employeeAttributes[9]),
-                                Integer.parseInt(employeeAttributes[10]),
                                 Double.parseDouble(employeeAttributes[3]),
-                                Double.parseDouble(employeeAttributes[11]),
+                                Double.parseDouble(employeeAttributes[10]),
                                 Integer.parseInt(employeeAttributes[1]),
                                 Integer.parseInt(employeeAttributes[2])));
-                    }
-                }
+                    } 
             }
         } catch (Exception e) {
         } finally {
@@ -743,6 +741,7 @@ public class MainGUI extends javax.swing.JFrame {
             } catch (IOException e) {
             }
         }
+        mainHashTable.displayContents();
         updateTable();
     }
 
