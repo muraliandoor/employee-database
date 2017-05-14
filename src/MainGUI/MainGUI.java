@@ -38,6 +38,9 @@ public class MainGUI extends javax.swing.JFrame {
         employeeTable.setVisible(true);
     }
 
+    public void saveTable(){
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,6 +75,11 @@ public class MainGUI extends javax.swing.JFrame {
         panelFullTime = new javax.swing.JPanel();
         labelAnnualSalary = new javax.swing.JLabel();
         fieldAnnualSalary = new javax.swing.JTextField();
+        ExitWindow = new javax.swing.JDialog();
+        Cancel = new javax.swing.JButton();
+        Save = new javax.swing.JButton();
+        Exit = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         panelTable = new javax.swing.JPanel();
         scrollPanel = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
@@ -365,6 +373,64 @@ public class MainGUI extends javax.swing.JFrame {
                 .addGap(15, 15, 15))
         );
 
+        ExitWindow.setTitle("Exit");
+
+        Cancel.setText("Cancel");
+        Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelActionPerformed(evt);
+            }
+        });
+
+        Save.setText("Save");
+        Save.setToolTipText("");
+        Save.setMaximumSize(new java.awt.Dimension(85, 23));
+        Save.setMinimumSize(new java.awt.Dimension(85, 23));
+        Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveActionPerformed(evt);
+            }
+        });
+
+        Exit.setText("Don't Save");
+        Exit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\andoorveedu\\Downloads\\Warning_Triangle.png")); // NOI18N
+        jLabel1.setText("Want to save your changes to this database?");
+
+        javax.swing.GroupLayout ExitWindowLayout = new javax.swing.GroupLayout(ExitWindow.getContentPane());
+        ExitWindow.getContentPane().setLayout(ExitWindowLayout);
+        ExitWindowLayout.setHorizontalGroup(
+            ExitWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ExitWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(ExitWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(ExitWindowLayout.createSequentialGroup()
+                        .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Exit)
+                        .addGap(18, 18, 18)
+                        .addComponent(Cancel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        ExitWindowLayout.setVerticalGroup(
+            ExitWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ExitWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ExitWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Exit)
+                    .addComponent(Cancel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Employee Database");
 
@@ -443,6 +509,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         btnExit.setText("Exit");
         btnExit.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout botBtnsLayout = new javax.swing.GroupLayout(botBtns);
         botBtns.setLayout(botBtnsLayout);
@@ -615,6 +686,28 @@ public class MainGUI extends javax.swing.JFrame {
         formAdd.setVisible(false);
     }//GEN-LAST:event_btnCancelAndExitActionPerformed
 
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        // TODO add your handling code here:
+        ExitWindow.setVisible(false);
+    }//GEN-LAST:event_CancelActionPerformed
+
+    private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_ExitActionPerformed
+
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+        // TODO add your handling code here:
+        saveTable();
+        System.exit(0);
+    }//GEN-LAST:event_SaveActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        // TODO add your handling code here:
+        ExitWindow.pack();
+        ExitWindow.setVisible(true);
+    }//GEN-LAST:event_btnExitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -654,6 +747,10 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Cancel;
+    private javax.swing.JButton Exit;
+    private javax.swing.JDialog ExitWindow;
+    private javax.swing.JButton Save;
     private javax.swing.JPanel botBtns;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelAndExit;
@@ -675,6 +772,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField fieldWage;
     private javax.swing.JTextField fieldWeeks;
     private javax.swing.JDialog formAdd;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JLabel labelAnnualSalary;
