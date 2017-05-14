@@ -9,9 +9,8 @@ import java.io.*;
 public class MainGUI extends javax.swing.JFrame {
 
     HashTable mainHashTable;
-    String FORM_ADD_TITLE = "Add an employee";
     int hashTableLength = 2;
-
+    int addOrEdit = 0;
     public MainGUI() {
         this.mainHashTable = new HashTable(hashTableLength);
         initComponents();
@@ -902,17 +901,17 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-        formAdd.setTitle(FORM_ADD_TITLE);
+        formAdd.setTitle("Add an employee");
+        spinnerEN.setEnabled(true);
+        addOrEdit = 1;
         formAdd.pack();
         fieldFN.setText("");
         fieldLN.setText("");
-
         formAdd.setVisible(true);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddMouseClicked
-        // TODO add your handling code here:
-        //sets the title of the panel (because the same panel is used for modifying and editing)
+   
     }//GEN-LAST:event_btnAddMouseClicked
 
     private void fieldAnnualSalaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldAnnualSalaryActionPerformed
@@ -934,11 +933,12 @@ public class MainGUI extends javax.swing.JFrame {
     private void btnSaveAndExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAndExitActionPerformed
         btnSaveAndCreateNewActionPerformed(evt);
         formAdd.setVisible(false);
-// updateTable();
     }//GEN-LAST:event_btnSaveAndExitActionPerformed
 
     private void btnSaveAndCreateNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAndCreateNewActionPerformed
-
+        if (addOrEdit ==2){
+            mainHashTable.removeEmployee((Integer)spinnerEN.getValue());
+        }
         if (mainHashTable.searchEmployee((int) spinnerEN.getValue()) != -1
                 || ("".equals(fieldFN.getText()))
                 || ("".equals(fieldLN.getText()))
@@ -1044,7 +1044,9 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOpenActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-
+        formAdd.setTitle("Edit an employee");
+        addOrEdit = 2;
+        spinnerEN.setEnabled(false);
         EmployeeInfo selectedEmployee = mainHashTable.returnEmployee((Integer) employeeTable.getValueAt(employeeTable.getSelectedRow(), 0));
         if (selectedEmployee instanceof PartTimeEmployee) {
             PartTimeEmployee selectedPartTimeEmployee = (PartTimeEmployee) selectedEmployee;
@@ -1064,6 +1066,7 @@ public class MainGUI extends javax.swing.JFrame {
         spinnerDeductionsRate.setValue(selectedEmployee.getDeductionsRate());
         formAdd.pack();
         formAdd.setVisible(true);
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
