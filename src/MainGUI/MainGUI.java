@@ -1,7 +1,7 @@
 package MainGUI;
 
 import javax.swing.table.DefaultTableModel;
-
+import java.io.*;
 /**
  * @author Bilaal
  */
@@ -39,7 +39,56 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     public void saveTable(){
-        
+        try{
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("employees.csv"), "UTF-8"));
+            for (int x = 0; x < hashTableLength; x++) {
+                for (int empIndex = 0; empIndex < mainHashTable.buckets[x].size(); empIndex++){
+                StringBuffer newLine = new StringBuffer();
+                if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee){
+                    newLine.append("FT");
+                    newLine.append(",");
+                    newLine.append(((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getYearlySalary() < 0 ? "" : ((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getYearlySalary());
+                    newLine.append(",");
+                    newLine.append(((FullTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome() < 0 ? "" : ((FullTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome());
+                    newLine.append(",");
+                }
+                else if (mainHashTable.buckets[x].get(empIndex) instanceof PartTimeEmployee){
+                    newLine.append("PT");
+                    newLine.append(",");
+                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumHours() < 0 ? "" : ((PartTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getNumHours());
+                    newLine.append(",");
+                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumWeeks() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumWeeks());
+                    newLine.append(",");
+                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getWage() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getWage());
+                    newLine.append(",");
+                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome());
+                    newLine.append(",");
+                }
+                else {
+                    newLine.append("NT");
+                    newLine.append(",");
+                }
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getEmployeeNumber() < 0 ? "" : mainHashTable.buckets[x].get(empIndex).getEmployeeNumber());
+                newLine.append(",");
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getFirstName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getFirstName());
+                newLine.append(",");
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getLastName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getLastName());
+                newLine.append(",");
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getSex() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getSex());
+                newLine.append(",");
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getWorkLocation() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getWorkLocation());
+                newLine.append(",");
+                newLine.append((mainHashTable.buckets[x].get(empIndex).getDeductionsRate() < 0 || mainHashTable.buckets[x].get(empIndex).getDeductionsRate() > 1) ? "" : mainHashTable.buckets[x].get(empIndex).getDeductionsRate());             
+                bw.write(newLine.toString());
+                bw.newLine();
+                }
+            }
+            bw.flush();
+            bw.close();
+        }
+            catch (UnsupportedEncodingException e) {e.printStackTrace();}
+            catch (FileNotFoundException e){e.printStackTrace();}
+            catch (IOException e){e.printStackTrace();}
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -80,6 +129,10 @@ public class MainGUI extends javax.swing.JFrame {
         Save = new javax.swing.JButton();
         Exit = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        SaveWindow = new javax.swing.JDialog();
+        Cancel1 = new javax.swing.JButton();
+        Save1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         panelTable = new javax.swing.JPanel();
         scrollPanel = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
@@ -400,7 +453,7 @@ public class MainGUI extends javax.swing.JFrame {
         });
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\andoorveedu\\Downloads\\Warning_Triangle.png")); // NOI18N
-        jLabel1.setText("Want to save your changes to this database?");
+        jLabel1.setText("Want to save your changes to this database before exiting??");
 
         javax.swing.GroupLayout ExitWindowLayout = new javax.swing.GroupLayout(ExitWindow.getContentPane());
         ExitWindow.getContentPane().setLayout(ExitWindowLayout);
@@ -409,14 +462,17 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(ExitWindowLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(ExitWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(ExitWindowLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(ExitWindowLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(Exit)
                         .addGap(18, 18, 18)
-                        .addComponent(Cancel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Cancel)
+                        .addGap(60, 60, 60))))
         );
         ExitWindowLayout.setVerticalGroup(
             ExitWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -428,6 +484,55 @@ public class MainGUI extends javax.swing.JFrame {
                     .addComponent(Save, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Exit)
                     .addComponent(Cancel))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        SaveWindow.setTitle("Exit");
+
+        Cancel1.setText("Cancel");
+        Cancel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Cancel1ActionPerformed(evt);
+            }
+        });
+
+        Save1.setText("Save");
+        Save1.setToolTipText("");
+        Save1.setMaximumSize(new java.awt.Dimension(85, 23));
+        Save1.setMinimumSize(new java.awt.Dimension(85, 23));
+        Save1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Save1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\andoorveedu\\Downloads\\Warning_Triangle.png")); // NOI18N
+        jLabel2.setText("Are you sure you want to save to the archive?");
+
+        javax.swing.GroupLayout SaveWindowLayout = new javax.swing.GroupLayout(SaveWindow.getContentPane());
+        SaveWindow.getContentPane().setLayout(SaveWindowLayout);
+        SaveWindowLayout.setHorizontalGroup(
+            SaveWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SaveWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(SaveWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addGroup(SaveWindowLayout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addComponent(Save1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Cancel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        SaveWindowLayout.setVerticalGroup(
+            SaveWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SaveWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(SaveWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Save1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Cancel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -500,12 +605,27 @@ public class MainGUI extends javax.swing.JFrame {
 
         btnClear.setText("Clear");
         btnClear.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         btnOpen.setText("Open");
         btnOpen.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        btnOpen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenActionPerformed(evt);
+            }
+        });
 
         btnSave.setText("Save");
         btnSave.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnExit.setText("Exit");
         btnExit.setMargin(new java.awt.Insets(2, 0, 2, 0));
@@ -659,7 +779,7 @@ public class MainGUI extends javax.swing.JFrame {
                     comboxWorkLocation.getSelectedIndex(),
                     Double.parseDouble(fieldWage.getText()),
                     (Double) spinnerDeductionsRate.getValue(),
-                    Integer.parseInt(fieldWeeks.getText()),
+                    Integer.parseInt(fieldHours.getText()),
                     Integer.parseInt(fieldWeeks.getText())));
         }
         clearAddForm();
@@ -708,6 +828,31 @@ public class MainGUI extends javax.swing.JFrame {
         ExitWindow.setVisible(true);
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        SaveWindow.pack();
+        SaveWindow.setVisible(true);
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void Cancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Cancel1ActionPerformed
+        // TODO add your handling code here:
+        SaveWindow.setVisible(false);
+    }//GEN-LAST:event_Cancel1ActionPerformed
+
+    private void Save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Save1ActionPerformed
+        // TODO add your handling code here:
+        saveTable();
+        SaveWindow.setVisible(false);
+    }//GEN-LAST:event_Save1ActionPerformed
+
+    private void btnOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnOpenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -748,9 +893,12 @@ public class MainGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel;
+    private javax.swing.JButton Cancel1;
     private javax.swing.JButton Exit;
     private javax.swing.JDialog ExitWindow;
     private javax.swing.JButton Save;
+    private javax.swing.JButton Save1;
+    private javax.swing.JDialog SaveWindow;
     private javax.swing.JPanel botBtns;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelAndExit;
@@ -773,6 +921,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JTextField fieldWeeks;
     private javax.swing.JDialog formAdd;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JLabel labelAnnualSalary;

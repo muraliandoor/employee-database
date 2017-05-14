@@ -12,11 +12,23 @@ package MainGUI;
 public class FullTimeEmployee extends EmployeeInfo {
 
     public FullTimeEmployee() {
+        this.yearlySalary = 0;
     }
-    double annualSalary = 0;            
-    public FullTimeEmployee(int eNum, String fN, String lN, int sex, int workLocation, double deductionsRate, double pay) {
+    private double yearlySalary;            
+    public FullTimeEmployee(int eNum, String fN, String lN, int sex, int workLocation, double deductionsRate, double yearlySalary) {
         super(eNum, fN, lN, sex, workLocation, deductionsRate);
-        this.annualSalary = pay;
+        this.yearlySalary = 0;
     }
 
+	public double getYearlySalary() {
+		return yearlySalary;
+	}
+
+	public void setYearlySalary(double yearlySalary) {
+		this.yearlySalary = yearlySalary;
+	}
+	
+	public double calcNetAnnualIncome (){
+		return yearlySalary * (1 - deductionsRate);
+	}
 }
