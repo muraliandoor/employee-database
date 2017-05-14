@@ -40,55 +40,55 @@ public class MainGUI extends javax.swing.JFrame {
 
     public void saveTable(){
         try{
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("employees.csv"), "UTF-8"));
-            for (int x = 0; x < hashTableLength; x++) {
-                for (int empIndex = 0; empIndex < mainHashTable.buckets[x].size(); empIndex++){
-                StringBuffer newLine = new StringBuffer();
-                if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee){
-                    newLine.append("FT");
-                    newLine.append(",");
-                    newLine.append(((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getYearlySalary() < 0 ? "" : ((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getYearlySalary());
-                    newLine.append(",");
-                    newLine.append(((FullTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome() < 0 ? "" : ((FullTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome());
-                    newLine.append(",");
+            try (BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("employees.csv"), "UTF-8"))) {
+                for (int x = 0; x < hashTableLength; x++) {
+                    for (int empIndex = 0; empIndex < mainHashTable.buckets[x].size(); empIndex++){
+                        StringBuilder newLine = new StringBuilder();
+                        if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee){
+                            newLine.append("FT");
+                            newLine.append(",");
+                            newLine.append(((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getYearlySalary() < 0 ? "" : ((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getYearlySalary());
+                            newLine.append(",");
+                            newLine.append(((FullTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome() < 0 ? "" : ((FullTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome());
+                            newLine.append(",");
+                        }
+                        else if (mainHashTable.buckets[x].get(empIndex) instanceof PartTimeEmployee){
+                            newLine.append("PT");
+                            newLine.append(",");
+                            newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumHours() < 0 ? "" : ((PartTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getNumHours());
+                            newLine.append(",");
+                            newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumWeeks() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumWeeks());
+                            newLine.append(",");
+                            newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getWage() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getWage());
+                            newLine.append(",");
+                            newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome());
+                            newLine.append(",");
+                        }
+                        else {
+                            newLine.append("NT");
+                            newLine.append(",");
+                        }
+                        newLine.append(mainHashTable.buckets[x].get(empIndex).getEmployeeNumber() < 0 ? "" : mainHashTable.buckets[x].get(empIndex).getEmployeeNumber());
+                        newLine.append(",");
+                        newLine.append(mainHashTable.buckets[x].get(empIndex).getFirstName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getFirstName());
+                        newLine.append(",");
+                        newLine.append(mainHashTable.buckets[x].get(empIndex).getLastName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getLastName());
+                        newLine.append(",");
+                        newLine.append(mainHashTable.buckets[x].get(empIndex).getSex() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getSex());
+                        newLine.append(",");
+                        newLine.append(mainHashTable.buckets[x].get(empIndex).getWorkLocation() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getWorkLocation());
+                        newLine.append(",");
+                        newLine.append((mainHashTable.buckets[x].get(empIndex).getDeductionsRate() < 0 || mainHashTable.buckets[x].get(empIndex).getDeductionsRate() > 1) ? "" : mainHashTable.buckets[x].get(empIndex).getDeductionsRate());
+                        bw.write(newLine.toString());
+                        bw.newLine();
+                    }
                 }
-                else if (mainHashTable.buckets[x].get(empIndex) instanceof PartTimeEmployee){
-                    newLine.append("PT");
-                    newLine.append(",");
-                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumHours() < 0 ? "" : ((PartTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getNumHours());
-                    newLine.append(",");
-                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumWeeks() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumWeeks());
-                    newLine.append(",");
-                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getWage() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getWage());
-                    newLine.append(",");
-                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome());
-                    newLine.append(",");
-                }
-                else {
-                    newLine.append("NT");
-                    newLine.append(",");
-                }
-                newLine.append(mainHashTable.buckets[x].get(empIndex).getEmployeeNumber() < 0 ? "" : mainHashTable.buckets[x].get(empIndex).getEmployeeNumber());
-                newLine.append(",");
-                newLine.append(mainHashTable.buckets[x].get(empIndex).getFirstName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getFirstName());
-                newLine.append(",");
-                newLine.append(mainHashTable.buckets[x].get(empIndex).getLastName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getLastName());
-                newLine.append(",");
-                newLine.append(mainHashTable.buckets[x].get(empIndex).getSex() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getSex());
-                newLine.append(",");
-                newLine.append(mainHashTable.buckets[x].get(empIndex).getWorkLocation() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getWorkLocation());
-                newLine.append(",");
-                newLine.append((mainHashTable.buckets[x].get(empIndex).getDeductionsRate() < 0 || mainHashTable.buckets[x].get(empIndex).getDeductionsRate() > 1) ? "" : mainHashTable.buckets[x].get(empIndex).getDeductionsRate());             
-                bw.write(newLine.toString());
-                bw.newLine();
-                }
+                bw.flush();
             }
-            bw.flush();
-            bw.close();
         }
-            catch (UnsupportedEncodingException e) {e.printStackTrace();}
-            catch (FileNotFoundException e){e.printStackTrace();}
-            catch (IOException e){e.printStackTrace();}
+            catch (UnsupportedEncodingException e) {}
+            catch (FileNotFoundException e){}
+            catch (IOException e){}
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -668,6 +668,7 @@ public class MainGUI extends javax.swing.JFrame {
         );
 
         jMenu1.setText("File");
+        jMenu1.setToolTipText("");
         menubar.add(jMenu1);
 
         jMenu2.setText("Edit");
