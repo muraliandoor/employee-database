@@ -167,7 +167,13 @@ public class MainGUI extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         menubar = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        openMenuItem = new javax.swing.JMenuItem();
+        saveMenuItem = new javax.swing.JMenuItem();
+        exitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        addMenuItem = new javax.swing.JMenuItem();
+        editMenuItem = new javax.swing.JMenuItem();
+        removeMenuItem = new javax.swing.JMenuItem();
 
         labelFN.setText("First Name");
 
@@ -692,9 +698,60 @@ public class MainGUI extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenu1.setToolTipText("");
+
+        openMenuItem.setText("Open");
+        openMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(openMenuItem);
+
+        saveMenuItem.setText("Save");
+        saveMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(saveMenuItem);
+
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu1.add(exitMenuItem);
+
         menubar.add(jMenu1);
 
         jMenu2.setText("Edit");
+
+        addMenuItem.setText("Add");
+        addMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(addMenuItem);
+
+        editMenuItem.setText("Edit");
+        editMenuItem.setToolTipText("");
+        editMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(editMenuItem);
+
+        removeMenuItem.setText("Remove");
+        removeMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu2.add(removeMenuItem);
+
         menubar.add(jMenu2);
 
         setJMenuBar(menubar);
@@ -784,7 +841,6 @@ public class MainGUI extends javax.swing.JFrame {
             mainHashTable.removeEmployee((int) employeeTable.getModel().getValueAt(row, 0));
         }
         updateTable();
-        mainHashTable.displayContents();//debug
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -922,6 +978,36 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEditActionPerformed
 
+    private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
+        // TODO add your handling code here:
+        btnOpenActionPerformed(evt);
+    }//GEN-LAST:event_openMenuItemActionPerformed
+
+    private void saveMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveMenuItemActionPerformed
+        // TODO add your handling code here:
+        btnSaveActionPerformed(evt);
+    }//GEN-LAST:event_saveMenuItemActionPerformed
+
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        // TODO add your handling code here:
+        btnExitActionPerformed(evt);
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void addMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMenuItemActionPerformed
+        // TODO add your handling code here:
+        btnAddActionPerformed(evt);
+    }//GEN-LAST:event_addMenuItemActionPerformed
+
+    private void removeMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMenuItemActionPerformed
+        // TODO add your handling code here:
+        btnRemoveActionPerformed(evt);
+    }//GEN-LAST:event_removeMenuItemActionPerformed
+
+    private void editMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMenuItemActionPerformed
+        // TODO add your handling code here:
+        btnEditActionPerformed(evt);
+    }//GEN-LAST:event_editMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -966,6 +1052,7 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton Exit;
     private javax.swing.JButton Save;
     private javax.swing.JButton Save1;
+    private javax.swing.JMenuItem addMenuItem;
     private javax.swing.JPanel botBtns;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancelAndExit;
@@ -979,7 +1066,9 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnSaveAndExit;
     private javax.swing.JComboBox<String> comboxSex;
     private javax.swing.JComboBox<String> comboxWorkLocation;
+    private javax.swing.JMenuItem editMenuItem;
     private javax.swing.JTable employeeTable;
+    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JDialog exitWindow;
     private javax.swing.JTextField fieldAnnualSalary;
     private javax.swing.JTextField fieldFN;
@@ -1003,12 +1092,15 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel labelWeeks;
     private javax.swing.JLabel labelWorkLocation;
     private javax.swing.JMenuBar menubar;
+    private javax.swing.JMenuItem openMenuItem;
     private javax.swing.JPanel panelFullTime;
     private javax.swing.JPanel panelLeft;
     private javax.swing.JPanel panelPartTime;
     private javax.swing.JPanel panelRight;
     private javax.swing.JPanel panelTable;
     private javax.swing.JPanel panelUp;
+    private javax.swing.JMenuItem removeMenuItem;
+    private javax.swing.JMenuItem saveMenuItem;
     private javax.swing.JDialog saveWindow;
     private javax.swing.JScrollPane scrollPanel;
     private javax.swing.JSpinner spinnerDeductionsRate;
