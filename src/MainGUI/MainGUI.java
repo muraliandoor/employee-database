@@ -452,7 +452,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\andoorveedu\\Downloads\\Warning_Triangle.png")); // NOI18N
         jLabel1.setText("Want to save your changes to this database before exiting??");
 
         javax.swing.GroupLayout ExitWindowLayout = new javax.swing.GroupLayout(ExitWindow.getContentPane());
@@ -506,7 +505,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\andoorveedu\\Downloads\\Warning_Triangle.png")); // NOI18N
         jLabel2.setText("Are you sure you want to save to the archive?");
 
         javax.swing.GroupLayout SaveWindowLayout = new javax.swing.GroupLayout(SaveWindow.getContentPane());
@@ -592,6 +590,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         btnEdit.setText("Edit");
         btnEdit.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnRemove.setText("Remove");
         btnRemove.setMargin(new java.awt.Insets(2, 0, 2, 0));
@@ -707,7 +710,7 @@ public class MainGUI extends javax.swing.JFrame {
         String fileToParse = "employees.csv";
         BufferedReader fileReader = null;
         try {
-            String line = "";
+            String line;
             fileReader = new BufferedReader(new FileReader(fileToParse));
 
             while ((line = fileReader.readLine()) != null) {
@@ -758,12 +761,12 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
-        // TODO add your handling code here:
         int row = employeeTable.getSelectedRow();
         if (row > -1) {
             mainHashTable.removeEmployee((int) employeeTable.getModel().getValueAt(row, 0));
         }
         updateTable();
+        mainHashTable.displayContents();//debug
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -896,6 +899,10 @@ public class MainGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         loadTable();
     }//GEN-LAST:event_btnOpenActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
