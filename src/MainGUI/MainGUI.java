@@ -154,6 +154,9 @@ public class MainGUI extends javax.swing.JFrame {
         Cancel1 = new javax.swing.JButton();
         Save1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        ErrorWindow = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        labelErrorMsg = new javax.swing.JLabel();
         panelTable = new javax.swing.JPanel();
         scrollPanel = new javax.swing.JScrollPane();
         employeeTable = new javax.swing.JTable();
@@ -177,7 +180,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         labelFN.setText("First Name");
 
-        fieldFN.setText("Enter name");
+        fieldFN.setToolTipText("Enter name");
         fieldFN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldFNActionPerformed(evt);
@@ -186,7 +189,7 @@ public class MainGUI extends javax.swing.JFrame {
 
         labelLN.setText("Last Name");
 
-        fieldLN.setText("Enter name");
+        fieldLN.setToolTipText("Enter name");
         fieldLN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldLNActionPerformed(evt);
@@ -561,6 +564,42 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        labelErrorMsg.setText("Please fix the error(s) before saving");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelErrorMsg)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelErrorMsg)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout ErrorWindowLayout = new javax.swing.GroupLayout(ErrorWindow.getContentPane());
+        ErrorWindow.getContentPane().setLayout(ErrorWindowLayout);
+        ErrorWindowLayout.setHorizontalGroup(
+            ErrorWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ErrorWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        ErrorWindowLayout.setVerticalGroup(
+            ErrorWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ErrorWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Employee Database");
 
@@ -791,27 +830,27 @@ public class MainGUI extends javax.swing.JFrame {
             fileReader = new BufferedReader(new FileReader(fileToParse));
             while ((line = fileReader.readLine()) != null) {
                 String[] employeeAttributes = line.split(",");
-                    if ("FT".equals(employeeAttributes[0])) {
-                        mainHashTable.addEmployee(new FullTimeEmployee(
-                                Integer.parseInt(employeeAttributes[3]),
-                                employeeAttributes[4],
-                                employeeAttributes[5],
-                                Integer.parseInt(employeeAttributes[6]),
-                                Integer.parseInt(employeeAttributes[7]),
-                                Double.parseDouble(employeeAttributes[8]),
-                                Double.parseDouble(employeeAttributes[1])));
-                    } else if ("PT".equals(employeeAttributes[0])) {
-                        mainHashTable.addEmployee(new PartTimeEmployee(
-                                Integer.parseInt(employeeAttributes[5]),
-                                employeeAttributes[6],
-                                employeeAttributes[7],
-                                Integer.parseInt(employeeAttributes[8]),
-                                Integer.parseInt(employeeAttributes[9]),
-                                Double.parseDouble(employeeAttributes[3]),
-                                Double.parseDouble(employeeAttributes[10]),
-                                Integer.parseInt(employeeAttributes[1]),
-                                Integer.parseInt(employeeAttributes[2])));
-                    } 
+                if ("FT".equals(employeeAttributes[0])) {
+                    mainHashTable.addEmployee(new FullTimeEmployee(
+                            Integer.parseInt(employeeAttributes[3]),
+                            employeeAttributes[4],
+                            employeeAttributes[5],
+                            Integer.parseInt(employeeAttributes[6]),
+                            Integer.parseInt(employeeAttributes[7]),
+                            Double.parseDouble(employeeAttributes[8]),
+                            Double.parseDouble(employeeAttributes[1])));
+                } else if ("PT".equals(employeeAttributes[0])) {
+                    mainHashTable.addEmployee(new PartTimeEmployee(
+                            Integer.parseInt(employeeAttributes[5]),
+                            employeeAttributes[6],
+                            employeeAttributes[7],
+                            Integer.parseInt(employeeAttributes[8]),
+                            Integer.parseInt(employeeAttributes[9]),
+                            Double.parseDouble(employeeAttributes[3]),
+                            Double.parseDouble(employeeAttributes[10]),
+                            Integer.parseInt(employeeAttributes[1]),
+                            Integer.parseInt(employeeAttributes[2])));
+                }
             }
         } catch (Exception e) {
         } finally {
@@ -881,29 +920,39 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveAndExitActionPerformed
 
     private void btnSaveAndCreateNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveAndCreateNewActionPerformed
-        if (tabEType.getSelectedComponent() == panelFullTime) {
-            mainHashTable.addEmployee(new FullTimeEmployee(
-                    (Integer) (spinnerEN.getValue()),
-                    fieldFN.getText(),
-                    fieldLN.getText(),
-                    comboxSex.getSelectedIndex(),
-                    comboxWorkLocation.getSelectedIndex(),
-                    (Double) spinnerDeductionsRate.getValue(),
-                    Integer.parseInt(fieldAnnualSalary.getText())));
-        } else if (tabEType.getSelectedComponent() == panelPartTime) {
-            mainHashTable.addEmployee(new PartTimeEmployee(
-                    ((Integer) spinnerEN.getValue()),
-                    fieldFN.getText(),
-                    fieldLN.getText(),
-                    comboxSex.getSelectedIndex(),
-                    comboxWorkLocation.getSelectedIndex(),
-                    Double.parseDouble(fieldWage.getText()),
-                    (Double) spinnerDeductionsRate.getValue(),
-                    Integer.parseInt(fieldHours.getText()),
-                    Integer.parseInt(fieldWeeks.getText())));
+
+        if (mainHashTable.searchEmployee((int) spinnerEN.getValue()) != -1
+                || ("".equals(fieldFN.getText()))
+                || ("".equals(fieldLN.getText()))
+                || (((double) spinnerDeductionsRate.getValue() < 0) || ((double) spinnerDeductionsRate.getValue() > 1))
+                || ((tabEType.getSelectedComponent() == panelFullTime) && (fieldAnnualSalary.getText() == null))) {
+            ErrorWindow.setVisible(true);
+        } else {
+            if (tabEType.getSelectedComponent() == panelFullTime) {
+                mainHashTable.addEmployee(new FullTimeEmployee(
+                        (Integer) (spinnerEN.getValue()),
+                        fieldFN.getText(),
+                        fieldLN.getText(),
+                        comboxSex.getSelectedIndex(),
+                        comboxWorkLocation.getSelectedIndex(),
+                        (Double) spinnerDeductionsRate.getValue(),
+                        Integer.parseInt(fieldAnnualSalary.getText())));
+            } else if (tabEType.getSelectedComponent() == panelPartTime) {
+                mainHashTable.addEmployee(new PartTimeEmployee(
+                        ((Integer) spinnerEN.getValue()),
+                        fieldFN.getText(),
+                        fieldLN.getText(),
+                        comboxSex.getSelectedIndex(),
+                        comboxWorkLocation.getSelectedIndex(),
+                        Double.parseDouble(fieldWage.getText()),
+                        (Double) spinnerDeductionsRate.getValue(),
+                        Integer.parseInt(fieldHours.getText()),
+                        Integer.parseInt(fieldWeeks.getText())));
+                clearAddForm();
+                updateTable();
+            }
+
         }
-        clearAddForm();
-        updateTable();
     }//GEN-LAST:event_btnSaveAndCreateNewActionPerformed
 
     private void comboxSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxSexActionPerformed
@@ -975,7 +1024,24 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOpenActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        formAdd.setVisible(true);
+        EmployeeInfo selectedEmployee = mainHashTable.returnEmployee((Integer) employeeTable.getValueAt(employeeTable.getSelectedRow(), 1));
+        if (selectedEmployee instanceof PartTimeEmployee) {
+            PartTimeEmployee selectedPartTimeEmployee = (PartTimeEmployee) selectedEmployee;
+            tabEType.setSelectedComponent(panelPartTime);
+            fieldHours.setText(Integer.toString(selectedPartTimeEmployee.getNumHours()));
+            fieldWeeks.setText(Integer.toString(selectedPartTimeEmployee.getNumHours()));
+            fieldWage.setText(Integer.toString(selectedPartTimeEmployee.getNumWeeks()));
+        } else if (selectedEmployee instanceof FullTimeEmployee) {
+            FullTimeEmployee selectedFullTimeEmployee = (FullTimeEmployee) selectedEmployee;
+            fieldAnnualSalary.setText(Double.toString(selectedFullTimeEmployee.getYearlySalary()));
+        }
+        spinnerEN.setValue(selectedEmployee.getEmployeeNumber());
+        fieldFN.setText(selectedEmployee.getFirstName());
+        fieldLN.setText(selectedEmployee.getLastName());
+        comboxSex.setSelectedIndex(selectedEmployee.getSex());
+        comboxWorkLocation.setSelectedIndex(selectedEmployee.getWorkLocation());
+        spinnerDeductionsRate.setValue(selectedEmployee.getDeductionsRate());
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
@@ -1049,6 +1115,7 @@ public class MainGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Cancel;
     private javax.swing.JButton Cancel1;
+    private javax.swing.JDialog ErrorWindow;
     private javax.swing.JButton Exit;
     private javax.swing.JButton Save;
     private javax.swing.JButton Save1;
@@ -1081,8 +1148,10 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelAnnualSalary;
     private javax.swing.JLabel labelEN;
+    private javax.swing.JLabel labelErrorMsg;
     private javax.swing.JLabel labelFN;
     private javax.swing.JLabel labelHours;
     private javax.swing.JLabel labelLN;
@@ -1107,5 +1176,4 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JSpinner spinnerEN;
     private javax.swing.JTabbedPane tabEType;
     // End of variables declaration//GEN-END:variables
-
 }
