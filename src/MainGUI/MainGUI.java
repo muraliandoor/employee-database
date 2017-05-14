@@ -764,7 +764,6 @@ public class MainGUI extends javax.swing.JFrame {
             } catch (IOException e) {
             }
         }
-        mainHashTable.displayContents();
         updateTable();
     }
 
