@@ -74,9 +74,9 @@ public class MainGUI extends javax.swing.JFrame {
                         newLine.append(",");
                         newLine.append(mainHashTable.buckets[x].get(empIndex).getLastName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getLastName());
                         newLine.append(",");
-                        newLine.append(mainHashTable.buckets[x].get(empIndex).getSex() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getSex());
+                        newLine.append((mainHashTable.buckets[x].get(empIndex).getWorkLocation() != 1) && (mainHashTable.buckets[x].get(empIndex).getWorkLocation() != 2) && (mainHashTable.buckets[x].get(empIndex).getWorkLocation() != 0) ? "" : mainHashTable.buckets[x].get(empIndex).getSex());
                         newLine.append(",");
-                        newLine.append(mainHashTable.buckets[x].get(empIndex).getWorkLocation() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getWorkLocation());
+                        newLine.append((mainHashTable.buckets[x].get(empIndex).getWorkLocation() != 0) && (mainHashTable.buckets[x].get(empIndex).getWorkLocation() != 1) && (mainHashTable.buckets[x].get(empIndex).getWorkLocation() != 2) ? "" : mainHashTable.buckets[x].get(empIndex).getWorkLocation());
                         newLine.append(",");
                         newLine.append((mainHashTable.buckets[x].get(empIndex).getDeductionsRate() < 0 || mainHashTable.buckets[x].get(empIndex).getDeductionsRate() > 1) ? "" : mainHashTable.buckets[x].get(empIndex).getDeductionsRate());
                         bw.write(newLine.toString());
@@ -703,6 +703,37 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void loadTable(){
+        String fileToParse = "employees.csv";
+        BufferedReader fileReader = null;
+        try
+        {
+            String line = "";
+            //Create the file reader
+            fileReader = new BufferedReader(new FileReader(fileToParse));
+             
+            //Read the file line by line
+            while ((line = fileReader.readLine()) != null) 
+            {
+                //Get all tokens available in line
+                String[] tokens = line.split(",");
+                for(String token : tokens)
+                {
+                    //Print all tokens
+                    System.out.println(token);
+                }
+            }
+        } 
+        catch (Exception e) {
+        } 
+        finally
+        {
+            try {
+                fileReader.close();
+            } catch (IOException e) {
+            }
+        }
+    }
     private void clearAddForm() {
         fieldFN.setText("");
         fieldLN.setText("");
@@ -852,6 +883,7 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenActionPerformed
         // TODO add your handling code here:
+        loadTable();
     }//GEN-LAST:event_btnOpenActionPerformed
 
     /**
