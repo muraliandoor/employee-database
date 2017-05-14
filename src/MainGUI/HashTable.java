@@ -60,6 +60,9 @@ public class HashTable {
                 System.out.println("Bucket: " + x);
                 for (int y = 0; y < buckets[x].size(); y++) {
                     System.out.println(buckets[x].get(y).getEmployeeNumber());
+                    //debugging check
+                    System.out.println(buckets[x].get(y).getFirstName());
+                    System.out.println(buckets[x].get(y).getLastName());
                 }
                 System.out.println("");
             }

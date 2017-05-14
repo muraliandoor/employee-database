@@ -15,7 +15,7 @@ public class PartTimeEmployee extends EmployeeInfo {
     private double wage; //double storing value of wage
     private int numHours; //int storing number of hours worked per week
     private int numWeeks; //int storing number of weeks worked per year
-    
+
     public PartTimeEmployee() {
         super();
         wage = 0;
@@ -30,9 +30,6 @@ public class PartTimeEmployee extends EmployeeInfo {
         this.numWeeks = numWeeks;
     }
 
-    //getter for pay
-
-
     //getter and setter for hours per week
     public int getNumHours() {
         return numHours;
@@ -45,11 +42,11 @@ public class PartTimeEmployee extends EmployeeInfo {
     public void setWage(double wage) {
         this.wage = wage;
     }
-    
-     public double getWage() {
+
+    public double getWage() {
         return wage;
     }
-     
+
     //getter and setter for weeks per year
     public int getNumWeeks() {
         return numWeeks;
@@ -58,11 +55,12 @@ public class PartTimeEmployee extends EmployeeInfo {
     public void setNumWeeks(int numWeeks) {
         this.numWeeks = numWeeks;
     }
-    
-    public double calcAnnualIncome () {
-	return wage * numHours * numWeeks; 
+
+    public double calcAnnualIncome() {
+        return wage * numHours * numWeeks;
     }
-    public double calcNetAnnualIncome () {
-	return wage * numHours * numWeeks * (1-deductionsRate); 
+
+    public double calcNetAnnualIncome() {
+        return wage * numHours * numWeeks * (1 - deductionsRate);
     }
 }
