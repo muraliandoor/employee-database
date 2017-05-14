@@ -40,17 +40,15 @@ public class MainGUI extends javax.swing.JFrame {
                         break;
                 }
                 rowData[4] = comboxWorkLocation.getModel().getElementAt(mainHashTable.buckets[x].get(empIndex).getWorkLocation());
-                if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee){
+                if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee) {
                     rowData[5] = "Full Time Employee";
-                }
-                else if (mainHashTable.buckets[x].get(empIndex) instanceof PartTimeEmployee){
+                } else if (mainHashTable.buckets[x].get(empIndex) instanceof PartTimeEmployee) {
                     rowData[5] = "Part Time Employee";
                 }
                 rowData[6] = mainHashTable.buckets[x].get(empIndex).getDeductionsRate();
-                if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee){
+                if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee) {
                     rowData[7] = ((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome();
-                }
-                else if (mainHashTable.buckets[x].get(empIndex) instanceof PartTimeEmployee){
+                } else if (mainHashTable.buckets[x].get(empIndex) instanceof PartTimeEmployee) {
                     rowData[7] = ((PartTimeEmployee) mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome();
                 }
                 model.addRow(rowData);
@@ -564,23 +562,24 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        ErrorWindow.setAlwaysOnTop(true);
+        ErrorWindow.setMinimumSize(new java.awt.Dimension(200, 40));
+        ErrorWindow.setPreferredSize(new java.awt.Dimension(200, 40));
+        ErrorWindow.setSize(new java.awt.Dimension(200, 40));
+
         labelErrorMsg.setText("Please fix the error(s) before saving");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labelErrorMsg)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(labelErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(labelErrorMsg)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ErrorWindowLayout = new javax.swing.GroupLayout(ErrorWindow.getContentPane());
@@ -589,14 +588,14 @@ public class MainGUI extends javax.swing.JFrame {
             ErrorWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ErrorWindowLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         ErrorWindowLayout.setVerticalGroup(
             ErrorWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ErrorWindowLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -944,7 +943,7 @@ public class MainGUI extends javax.swing.JFrame {
                         comboxSex.getSelectedIndex(),
                         comboxWorkLocation.getSelectedIndex(),
                         (Double) spinnerDeductionsRate.getValue(),
-                        Integer.parseInt(fieldAnnualSalary.getText())));
+                        Double.parseDouble(fieldAnnualSalary.getText())));
             } else if (tabEType.getSelectedComponent() == panelPartTime) {
                 mainHashTable.addEmployee(new PartTimeEmployee(
                         ((Integer) spinnerEN.getValue()),
@@ -956,11 +955,12 @@ public class MainGUI extends javax.swing.JFrame {
                         (Double) spinnerDeductionsRate.getValue(),
                         Integer.parseInt(fieldHours.getText()),
                         Integer.parseInt(fieldWeeks.getText())));
-                clearAddForm();
-                updateTable();
+                
             }
-
+            updateTable();
+            clearAddForm();
         }
+
     }//GEN-LAST:event_btnSaveAndCreateNewActionPerformed
 
     private void comboxSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxSexActionPerformed
@@ -1032,7 +1032,7 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOpenActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        
+
         EmployeeInfo selectedEmployee = mainHashTable.returnEmployee((Integer) employeeTable.getValueAt(employeeTable.getSelectedRow(), 0));
         if (selectedEmployee instanceof PartTimeEmployee) {
             PartTimeEmployee selectedPartTimeEmployee = (PartTimeEmployee) selectedEmployee;

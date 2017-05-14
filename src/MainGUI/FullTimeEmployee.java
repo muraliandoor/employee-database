@@ -17,7 +17,7 @@ public class FullTimeEmployee extends EmployeeInfo {
     private double yearlySalary;            
     public FullTimeEmployee(int eNum, String fN, String lN, int sex, int workLocation, double deductionsRate, double yearlySalary) {
         super(eNum, fN, lN, sex, workLocation, deductionsRate);
-        this.yearlySalary = 0;
+        this.yearlySalary = yearlySalary;
     }
 
 	public double getYearlySalary() {
