@@ -1049,6 +1049,7 @@ public class MainGUI extends javax.swing.JFrame {
         comboxSex.setSelectedIndex(selectedEmployee.getSex());
         comboxWorkLocation.setSelectedIndex(selectedEmployee.getWorkLocation());
         spinnerDeductionsRate.setValue(selectedEmployee.getDeductionsRate());
+        formAdd.pack();
         formAdd.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
