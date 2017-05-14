@@ -28,14 +28,16 @@ public class MainGUI extends javax.swing.JFrame {
                 rowData[0] = mainHashTable.buckets[x].get(empIndex).getEmployeeNumber();
                 rowData[1] = mainHashTable.buckets[x].get(empIndex).getFirstName();
                 rowData[2] = mainHashTable.buckets[x].get(empIndex).getLastName();
-                if (mainHashTable.buckets[x].get(empIndex).getSex() == 0){
-                    rowData[5] = "Male";
-                }
-                else if (mainHashTable.buckets[x].get(empIndex).getSex() == 1){
-                    rowData[5] = "Female";
-                }
-                else {
-                    rowData[5] = "Other";
+                switch (mainHashTable.buckets[x].get(empIndex).getSex()) {
+                    case 0:
+                        rowData[5] = "Male";
+                        break;
+                    case 1:
+                        rowData[5] = "Female";
+                        break;
+                    default:
+                        rowData[5] = "Other";
+                        break;
                 }
                 rowData[4] = comboxWorkLocation.getModel().getElementAt(mainHashTable.buckets[x].get(empIndex).getWorkLocation());
                 if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee){
