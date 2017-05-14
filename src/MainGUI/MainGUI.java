@@ -29,13 +29,13 @@ public class MainGUI extends javax.swing.JFrame {
                 rowData[2] = mainHashTable.buckets[x].get(empIndex).getLastName();
                 switch (mainHashTable.buckets[x].get(empIndex).getSex()) {
                     case 0:
-                        rowData[5] = "Male";
+                        rowData[3] = "Male";
                         break;
                     case 1:
-                        rowData[5] = "Female";
+                        rowData[3] = "Female";
                         break;
                     default:
-                        rowData[5] = "Other";
+                        rowData[3] = "Other";
                         break;
                 }
                 rowData[4] = comboxWorkLocation.getModel().getElementAt(mainHashTable.buckets[x].get(empIndex).getWorkLocation());
@@ -527,6 +527,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainGUI/Warning_Triangle.png"))); // NOI18N
         jLabel1.setText("Want to save your changes to this database before exiting??");
 
         javax.swing.GroupLayout exitWindowLayout = new javax.swing.GroupLayout(exitWindow.getContentPane());
@@ -580,6 +581,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainGUI/Warning_Triangle.png"))); // NOI18N
         jLabel2.setText("Are you sure you want to save to the archive?");
 
         javax.swing.GroupLayout saveWindowLayout = new javax.swing.GroupLayout(saveWindow.getContentPane());
@@ -609,6 +611,58 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+<<<<<<< HEAD
+=======
+        ErrorWindow.setAlwaysOnTop(true);
+        ErrorWindow.setMinimumSize(new java.awt.Dimension(200, 40));
+
+        labelErrorMsg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainGUI/red_round_error_warning_icon.svg.hi.png"))); // NOI18N
+        labelErrorMsg.setText("Please fix the error(s) before saving");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labelErrorMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(labelErrorMsg)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout ErrorWindowLayout = new javax.swing.GroupLayout(ErrorWindow.getContentPane());
+        ErrorWindow.getContentPane().setLayout(ErrorWindowLayout);
+        ErrorWindowLayout.setHorizontalGroup(
+            ErrorWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ErrorWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ErrorWindowLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(okButton)
+                .addContainerGap())
+        );
+        ErrorWindowLayout.setVerticalGroup(
+            ErrorWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ErrorWindowLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(okButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+>>>>>>> origin/master
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Employee Database");
 
