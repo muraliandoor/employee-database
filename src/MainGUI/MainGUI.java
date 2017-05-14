@@ -480,6 +480,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainGUI/Warning_Triangle.png"))); // NOI18N
         jLabel1.setText("Want to save your changes to this database before exiting??");
 
         javax.swing.GroupLayout exitWindowLayout = new javax.swing.GroupLayout(exitWindow.getContentPane());
@@ -533,6 +534,7 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainGUI/Warning_Triangle.png"))); // NOI18N
         jLabel2.setText("Are you sure you want to save to the archive?");
 
         javax.swing.GroupLayout saveWindowLayout = new javax.swing.GroupLayout(saveWindow.getContentPane());
@@ -565,6 +567,7 @@ public class MainGUI extends javax.swing.JFrame {
         ErrorWindow.setAlwaysOnTop(true);
         ErrorWindow.setMinimumSize(new java.awt.Dimension(200, 40));
 
+        labelErrorMsg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainGUI/red_round_error_warning_icon.svg.hi.png"))); // NOI18N
         labelErrorMsg.setText("Please fix the error(s) before saving");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

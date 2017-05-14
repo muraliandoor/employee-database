@@ -494,6 +494,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainGUI/Warning_Triangle.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Want to save your changes to this database before exiting??"/>
           </Properties>
         </Component>
@@ -563,6 +566,9 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/MainGUI/Warning_Triangle.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Are you sure you want to save to the archive?"/>
           </Properties>
         </Component>
@@ -624,6 +630,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="labelErrorMsg">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/MainGUI/red_round_error_warning_icon.svg.hi.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Please fix the error(s) before saving"/>
               </Properties>
             </Component>
