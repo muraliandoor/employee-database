@@ -614,9 +614,16 @@ public class MainGUI extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         employeeTable.setGridColor(new java.awt.Color(222, 222, 222));
@@ -1024,8 +1031,8 @@ public class MainGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnOpenActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        formAdd.setVisible(true);
-        EmployeeInfo selectedEmployee = mainHashTable.returnEmployee((Integer) employeeTable.getValueAt(employeeTable.getSelectedRow(), 1));
+        
+        EmployeeInfo selectedEmployee = mainHashTable.returnEmployee((Integer) employeeTable.getValueAt(employeeTable.getSelectedRow(), 0));
         if (selectedEmployee instanceof PartTimeEmployee) {
             PartTimeEmployee selectedPartTimeEmployee = (PartTimeEmployee) selectedEmployee;
             tabEType.setSelectedComponent(panelPartTime);
@@ -1042,6 +1049,7 @@ public class MainGUI extends javax.swing.JFrame {
         comboxSex.setSelectedIndex(selectedEmployee.getSex());
         comboxWorkLocation.setSelectedIndex(selectedEmployee.getWorkLocation());
         spinnerDeductionsRate.setValue(selectedEmployee.getDeductionsRate());
+        formAdd.setVisible(true);
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
