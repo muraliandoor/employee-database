@@ -17,8 +17,8 @@ public class EmployeeInfo {
     private String lastName;
     private int sex; // 0 - male, 1- female, 2-other
     private int workLocation;// 0 - mississauga, 1- ottawa, 2-chicago
-    private double deductionsRate;
-    private double pay;
+    double deductionsRate;
+    double pay;
 
     // Default constructor
     public EmployeeInfo() {
@@ -42,29 +42,6 @@ public class EmployeeInfo {
         this.deductionsRate = deductionsRate;
     }
 
-    //getter/setter - first name
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    //getter/setter - last name
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    //getter/setter - employeeNumber
-    public int getEmployeeNumber() {
-        return (employeeNumber);
-    }
-
     public void setEmployeeNumber(int employeeNumber) {
         //makes sure that employee number is never set to below 0
         if (employeeNumber >= 0) {
@@ -74,46 +51,48 @@ public class EmployeeInfo {
         }
     }
 
-    //getter/setter - sex
-    public int getSex() {
-        return sex;
-    }
-
-    public void setSex(int sex) {
-        this.sex = sex;
-    }
-
     //getter and setter for pay
     public double getPay() {
-        return pay - pay * (deductionsRate);
+        return pay;
     }
-
-    public void setpay(double pay) {
-        this.pay = pay;
+    
+    public void setPay(double payset){
+        this.pay = payset;
     }
 
     //getter and setter for deductions rate
-    public double getDeductionsRate() {
-        return deductionsRate;
-    }
-
-    public void setDeductionsRate(double deductionsRate) {
-        this.deductionsRate = deductionsRate;
-    }
-
-    //getter and setter for work location
-    public int getWorkLocation() {
-        return workLocation;
-    }
-
-    public void setWorkLocation(int workLocation) {
-        this.workLocation = workLocation;
-    }
-
-    //method to return all attributes from superclass to write to file
-    public String getEmployeeAttributes() {
-        return employeeNumber + "," + firstName + "," + lastName + "," + sex + "," + workLocation
-                + "," + deductionsRate + "," + pay;
-    }
+        public int getEmployeeNumber() {
+		return employeeNumber;
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public int getSex() {
+		return sex;
+	}
+	public void setSex(int sex) {
+		this.sex = sex;
+	}
+	public int getWorkLocation() {
+		return workLocation;
+	}
+	public void setWorkLocation(int workLocation) {
+		this.workLocation = workLocation;
+	}
+	public double getDeductionsRate() {
+		return deductionsRate;
+	}
+	public void setDeductionsRate(double deductionsRate) {
+		this.deductionsRate = deductionsRate;
+	}
 
 }

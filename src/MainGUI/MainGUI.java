@@ -1,7 +1,7 @@
 package MainGUI;
 
 import javax.swing.table.DefaultTableModel;
-
+import java.io.*;
 /**
  * @author Bilaal
  */
@@ -39,7 +39,56 @@ public class MainGUI extends javax.swing.JFrame {
     }
 
     public void saveTable(){
-        
+        try{
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("employees.csv"), "UTF-8"));
+            for (int x = 0; x < hashTableLength; x++) {
+                for (int empIndex = 0; empIndex < mainHashTable.buckets[x].size(); empIndex++){
+                StringBuffer newLine = new StringBuffer();
+                if (mainHashTable.buckets[x].get(empIndex) instanceof FullTimeEmployee){
+                    newLine.append("FT");
+                    newLine.append(",");
+                    newLine.append(((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getYearlySalary() < 0 ? "" : ((FullTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getYearlySalary());
+                    newLine.append(",");
+                    newLine.append(((FullTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome() < 0 ? "" : ((FullTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome());
+                    newLine.append(",");
+                }
+                else if (mainHashTable.buckets[x].get(empIndex) instanceof PartTimeEmployee){
+                    newLine.append("PT");
+                    newLine.append(",");
+                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumHours() < 0 ? "" : ((PartTimeEmployee) mainHashTable.buckets[x].get(empIndex)).getNumHours());
+                    newLine.append(",");
+                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumWeeks() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getNumWeeks());
+                    newLine.append(",");
+                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getWage() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).getWage());
+                    newLine.append(",");
+                    newLine.append(((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome() < 0 ? "" : ((PartTimeEmployee)mainHashTable.buckets[x].get(empIndex)).calcNetAnnualIncome());
+                    newLine.append(",");
+                }
+                else {
+                    newLine.append("NT");
+                    newLine.append(",");
+                }
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getEmployeeNumber() < 0 ? "" : mainHashTable.buckets[x].get(empIndex).getEmployeeNumber());
+                newLine.append(",");
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getFirstName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getFirstName());
+                newLine.append(",");
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getLastName() == null ? "" : mainHashTable.buckets[x].get(empIndex).getLastName());
+                newLine.append(",");
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getSex() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getSex());
+                newLine.append(",");
+                newLine.append(mainHashTable.buckets[x].get(empIndex).getWorkLocation() != (0 | 1 | 2) ? "" : mainHashTable.buckets[x].get(empIndex).getWorkLocation());
+                newLine.append(",");
+                newLine.append((mainHashTable.buckets[x].get(empIndex).getDeductionsRate() < 0 || mainHashTable.buckets[x].get(empIndex).getDeductionsRate() > 1) ? "" : mainHashTable.buckets[x].get(empIndex).getDeductionsRate());             
+                bw.write(newLine.toString());
+                bw.newLine();
+                }
+            }
+            bw.flush();
+            bw.close();
+        }
+            catch (UnsupportedEncodingException e) {e.printStackTrace();}
+            catch (FileNotFoundException e){e.printStackTrace();}
+            catch (IOException e){e.printStackTrace();}
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -500,12 +549,22 @@ public class MainGUI extends javax.swing.JFrame {
 
         btnClear.setText("Clear");
         btnClear.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         btnOpen.setText("Open");
         btnOpen.setMargin(new java.awt.Insets(2, 0, 2, 0));
 
         btnSave.setText("Save");
         btnSave.setMargin(new java.awt.Insets(2, 0, 2, 0));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnExit.setText("Exit");
         btnExit.setMargin(new java.awt.Insets(2, 0, 2, 0));
@@ -659,7 +718,7 @@ public class MainGUI extends javax.swing.JFrame {
                     comboxWorkLocation.getSelectedIndex(),
                     Double.parseDouble(fieldWage.getText()),
                     (Double) spinnerDeductionsRate.getValue(),
-                    Integer.parseInt(fieldWeeks.getText()),
+                    Integer.parseInt(fieldHours.getText()),
                     Integer.parseInt(fieldWeeks.getText())));
         }
         clearAddForm();
@@ -707,6 +766,15 @@ public class MainGUI extends javax.swing.JFrame {
         ExitWindow.pack();
         ExitWindow.setVisible(true);
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
