@@ -19,6 +19,7 @@ public class MainGUI extends javax.swing.JFrame {
     public void updateTable() {
         employeeTable.setVisible(false);
         DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+        model.setRowCount(0);
         Object rowData[] = new Object[8];
         for (int x = 0; x < hashTableLength; x++) {
             for (int empIndex = 0; empIndex < mainHashTable.buckets[x].size(); empIndex++) {
@@ -524,6 +525,11 @@ public class MainGUI extends javax.swing.JFrame {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // TODO add your handling code here:
+        int row = employeeTable.getSelectedRow();
+        if (row > -1){
+            mainHashTable.removeEmployee((int) employeeTable.getModel().getValueAt(row, 0));
+        }
+        updateTable();
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -586,7 +592,7 @@ public class MainGUI extends javax.swing.JFrame {
                     Integer.parseInt(fieldWeeks.getText())));
         }
         clearAddForm();
-        updateTable();
+        updateTable(); 
     }//GEN-LAST:event_btnSaveAndCreateNewActionPerformed
 
     private void comboxSexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboxSexActionPerformed

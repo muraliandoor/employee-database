@@ -4,6 +4,15 @@ import java.util.*;
 
 public class HashTable {
 
+        int numItems;
+        ArrayList<EmployeeInfo>[] buckets;
+       
+        public HashTable(int numBuckets) {
+            buckets = new ArrayList[numBuckets];
+            for (int i = 0; i < numBuckets; i++) {
+                buckets[i] = new ArrayList<>(); 
+            }
+        }
 	// buckets is an array of ArrayList.  Each item in an ArrayList is an EmployeeInfo object.
 	public ArrayList<EmployeeInfo>[] buckets;
 
