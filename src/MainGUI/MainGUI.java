@@ -611,15 +611,12 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-<<<<<<< HEAD
-=======
         ErrorWindow.setAlwaysOnTop(true);
         ErrorWindow.setMinimumSize(new java.awt.Dimension(200, 40));
 
         labelErrorMsg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MainGUI/red_round_error_warning_icon.svg.hi.png"))); // NOI18N
         labelErrorMsg.setText("Please fix the error(s) before saving");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -639,7 +636,6 @@ public class MainGUI extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout ErrorWindowLayout = new javax.swing.GroupLayout(ErrorWindow.getContentPane());
         ErrorWindow.getContentPane().setLayout(ErrorWindowLayout);
         ErrorWindowLayout.setHorizontalGroup(
             ErrorWindowLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -660,10 +656,7 @@ public class MainGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(okButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
->>>>>>> origin/master
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        );      setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Employee Database");
 
         employeeTable.setModel(new javax.swing.table.DefaultTableModel(
